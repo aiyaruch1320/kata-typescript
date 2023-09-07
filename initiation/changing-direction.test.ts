@@ -1,5 +1,5 @@
 describe("changingDirection", () => {
-  it("xxx", () => {
+  it("should return count number when changing direction", () => {
     expect(changingDirection([1, 2, 3, 4, 5])).toEqual(0);
     expect(changingDirection([1, 2, 3, 2, 1])).toEqual(1);
     expect(changingDirection([1, 2, 2, 1, 2, 2])).toEqual(2);
@@ -9,25 +9,22 @@ describe("changingDirection", () => {
 
 function changingDirection(nums: number[]): number {
   let directionCount = 0;
-  let direction = "asc";
-  let prevValue = 0;
+  let direction = Direction.Up;
 
-  for (let i = 0; i < nums.length; i++) {
-    if (i === 0) {
-      prevValue = nums[i];
-      continue;
+  for (let i = 1; i < nums.length; i++) {
+    if (
+      (nums[i] > nums[i - 1] && direction === Direction.Down) ||
+      (nums[i] < nums[i - 1] && direction === Direction.Up)
+    ) {
+      directionCount++;
+      direction = direction === Direction.Up ? Direction.Down : Direction.Up;
     }
-
-    if (prevValue > nums[i] && direction === "asc") {
-      directionCount += 1;
-      direction = "desc";
-    } else if (prevValue < nums[i] && direction === "desc") {
-      directionCount += 1;
-      direction = "asc";
-    }
-
-    prevValue = nums[i];
   }
 
   return directionCount;
+}
+
+enum Direction {
+  Up = "up",
+  Down = "down",
 }
