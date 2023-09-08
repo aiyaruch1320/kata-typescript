@@ -17,12 +17,21 @@ function changingDirection(nums: number[]): number {
   let directionTrend = 0;
 
   for (let i = 1; i < nums.length; i++) {
-    let different = nums[i] - nums[i - 1];
-    let currentTrend = different > 0 ? 1 : -1;
-    if (different === 0 || directionTrend === currentTrend) continue;
-    if (directionTrend !== 0) directionCount++;
+    let different = nums[i] - nums[i - 1]; // if different > 0 => up, different < 0 => down, different = 0 => not change
+    let currentTrend = Math.sign(different); // return 1, 0, -1
+    if (isZero(different) || isNotChangeDirection(directionTrend, currentTrend))
+      continue;
+    if (!isZero(directionTrend)) directionCount++;
     directionTrend = currentTrend;
   }
 
   return directionCount;
+}
+
+function isNotChangeDirection(directionTrend: number, currentTrend: number) {
+  return directionTrend === currentTrend;
+}
+
+function isZero(different: number) {
+  return different === 0;
 }
