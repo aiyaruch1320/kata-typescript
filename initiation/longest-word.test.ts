@@ -1,4 +1,4 @@
-describe("countVowels", () => {
+describe("longestWord", () => {
   it("should return the long word in sentence", () => {
     expect(longestWord("hello world")).toEqual("hello");
     expect(longestWord("this is a sentence")).toEqual("sentence");

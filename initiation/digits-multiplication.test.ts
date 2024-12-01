@@ -1,4 +1,4 @@
-describe("factorial", () => {
+describe("digitsMultip", () => {
   it("should calculate the product of the digits excluding any zeroes", () => {
     expect(digitsMultip(1)).toEqual(1);
     expect(digitsMultip(123)).toEqual(6);
